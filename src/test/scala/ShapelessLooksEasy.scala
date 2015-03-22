@@ -46,9 +46,10 @@ class ShapelessLooksEasy extends FlatSpec with Matchers{
   
     
     //Lord Sabin, in his wisdom, made the λ mandatory
-    def fruitChecker[T <:HList:  <<:[Fruit]#λ ](fruits: T) = true
+    //also note that the space between : and <<: is mandatory
+    def fruitChecker[T <:HList : <<:[Fruit]#λ ](fruits: T) = true
    
-    fruitChecker(hlist1)
+    fruitChecker(hlist1.reverse)
     illTyped(
       """
         |fruitChecker(hlist2)
