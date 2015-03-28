@@ -36,13 +36,12 @@ class ShapelessGetsDarker extends FlatSpec with Matchers{
   
   case class FruitBasket[T<:HList : <<: [Fruit]#λ](owner:Owner, contents :T = HNil){
     def add(f:Fruit)(implicit e:Prepend[T,Fruit::HNil]) = new FruitBasket(owner, f+: contents )
-  
- //  def reverse(implicit e:Reverse[T]) = {
- //   implicit val y = implicitly[LUBConstraint[e.Out,Fruit]]
- //    new FruitBasket(owner,contents.reverse(e))
- //  }
-  //  def secretReverse(e:Reverse[T])(implicit ee:LUBConstraint[e.Out,Fruit]) = new FruitBasket(owner,contents.reverse(e))
-  }
+    //Go combine implicits, we ahve to call the Aux version of reverse, that lets us take the output type
+    //all the way to the top method.
+    //the regular Reverse would produce an e.Out, that we cannot feed to an implicit in the same parameter list
+   def reverse[T0<:HList](implicit e:Reverse.Aux[T,T0], e2: LUBConstraint[T0,Fruit]) =
+     new FruitBasket(owner,contents.reverse)
+   }
 
   it should "be able to handle a fruit basket" in {
     //create an empty basket, and it won't even compile!
