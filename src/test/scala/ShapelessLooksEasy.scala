@@ -21,8 +21,7 @@ class ShapelessLooksEasy extends FlatSpec with Matchers{
       """)
     
     val longerList = hlist :+ "something else"
-    // what's the type of last, according to IntelliJ?
-    // Say Terrified!
+    // according to IntelliJ what's the type of last below? Say Terrified!
     // hlist.Last.Aux[::[Int, ::[Double, ::[String, ::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out]]]], hlist.Last.Aux[::[Double, ::[String, ::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out]]], hlist.Last.Aux[::[String, ::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out]], hlist.Last.Aux[::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out], hlist.Last.Aux[::[String, HNil], String]#Out]#Out]#Out]#Out]#Out
     //this happens to resolve to String in the console, eventually. The compiler works very hard at figuring that out. IntelliJ just doesn't
     val last = longerList.last
@@ -45,8 +44,9 @@ class ShapelessLooksEasy extends FlatSpec with Matchers{
     val hlist2 = Apple :: Apple :: "A cat pretending to be fruit" ::Orange ::HNil
   
     
-    //Lord Sabin, in his wisdom, made the λ mandatory
-    //also note that the space between : and <<: is mandatory
+    //Lord Sabin, in his wisdom, made the λ symbol mandatory.
+    //note that the space between : and <<: is mandatory, as otherwise it thinks tht :<<: is some kind
+    // of eldritch operator at a place where only a type is expected
     def fruitChecker[T <:HList : <<:[Fruit]#λ ](fruits: T) = true
    
     fruitChecker(hlist1.reverse)
