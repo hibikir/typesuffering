@@ -21,9 +21,10 @@ class ShapelessLooksEasy extends FlatSpec with Matchers{
       """)
     
     val longerList = hlist :+ "something else"
-    // what'sthe type of last: According to IntelliJ? Say Terrified!
+    // what's the type of last, according to IntelliJ?
+    // Say Terrified!
     // hlist.Last.Aux[::[Int, ::[Double, ::[String, ::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out]]]], hlist.Last.Aux[::[Double, ::[String, ::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out]]], hlist.Last.Aux[::[String, ::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out]], hlist.Last.Aux[::[ShapelessLooksEasy.this.Cake.type, hlist.Prepend.Aux[HNil, ::[String, HNil], ::[String, HNil]]#Out], hlist.Last.Aux[::[String, HNil], String]#Out]#Out]#Out]#Out]#Out
-    //this happens to resolve to String in the console, eventually but the compiler works very hard at figuring that out. IntelliJ disagrees
+    //this happens to resolve to String in the console, eventually. The compiler works very hard at figuring that out. IntelliJ just doesn't
     val last = longerList.last
     last should be ("something else")
     
@@ -40,7 +41,6 @@ class ShapelessLooksEasy extends FlatSpec with Matchers{
     trait Fruit
     object Apple extends Fruit
     object Orange extends Fruit
-    
     val hlist1 = Apple :: Apple :: Orange ::Apple ::HNil
     val hlist2 = Apple :: Apple :: "A cat pretending to be fruit" ::Orange ::HNil
   
