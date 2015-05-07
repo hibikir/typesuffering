@@ -4,6 +4,7 @@ case class Person(name:String)
 case class Location[T](address:String,code:T)
 
 object FeedMe{
+  //uncomment the next line, and the test will not compile
   //def apply(p:Person) = p.name + " was yummy"
   def apply(f: (Location[_]) => Person) = f(Location[Int]("my house",42)).name + " was yummy"
 }
